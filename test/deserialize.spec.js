@@ -176,14 +176,14 @@ describe('deserializing an object into a form', () => {
         '<input type="text" name="foo[]">' +
         '</form>'
       )
-      deserialize(form, { foo: ['baz', 'biz', 'qux'] })
+      deserialize(form, { foo: ['baz', 'biz'] })
     })
 
     it('should return result as array', () => {
       const fields = form.querySelectorAll('[name="foo[]"]')
       expect(fields[0].value).to.equal('baz')
       expect(fields[1].value).to.equal('biz')
-      expect(fields[2].value).to.equal('qux')
+      expect(fields[2].value).to.equal('')
     })
   })
 
