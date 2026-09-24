@@ -165,6 +165,28 @@ describe('deserializing an object into a form', () => {
     })
   })
 
+  describe('when deserializing an array input of text fields', () => {
+    let form
+
+    beforeEach(() => {
+      form = domify(
+        '<form>' +
+        '<input type="text" name="foo[]" value="baz">' +
+        '<input type="text" name="foo[]" value="biz">' +
+        '<input type="text" name="foo[]" value="qux">' +
+        '</form>'
+      )
+      deserialize(form, { foo: ['baz', 'biz', 'qux'] })
+    })
+
+    it('should return result as array', () => {
+      const fields = form.querySelectorAll('[name="foo[]"]')
+      expect(fields[0].value).to.equal('baz')
+      expect(fields[1].value).to.equal('biz')
+      expect(fields[2].value).to.equal('qux')
+    })
+  })
+
   describe('when deserializing into a button', () => {
     let result, value
 

@@ -208,6 +208,25 @@ describe('serialize', () => {
     })
   })
 
+  describe('when serializing an array input of text fields', () => {
+    let result
+
+    beforeEach(() => {
+      const form = domify(
+        '<form>' +
+        '<input type="text" name="foo[]" value="baz">' +
+        '<input type="text" name="foo[]" value="biz">' +
+        '<input type="text" name="foo[]" value="qux">' +
+        '</form>'
+      )
+      result = serialize(form)
+    })
+
+    it('should return result as array', () => {
+      expect(result.foo).to.deep.equal(['baz', 'biz', 'qux'])
+    })
+  })
+
   describe('when ignoring a field by selector', () => {
     let result
 
