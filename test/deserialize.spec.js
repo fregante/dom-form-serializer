@@ -185,6 +185,16 @@ describe('deserializing an object into a form', () => {
       expect(fields[1].value).to.equal('biz')
       expect(fields[2].value).to.equal('')
     })
+
+    it('should return result as array when reusing options.inputWriters', () => {
+      const options = {}
+      deserialize(form, { foo: ['foo', 'bar', 'bor'] }, options)
+      deserialize(form, { foo: ['one', 'two', 'three'] }, options)
+      const fields = form.querySelectorAll('[name="foo[]"]')
+      expect(fields[0].value).to.equal('one')
+      expect(fields[1].value).to.equal('two')
+      expect(fields[2].value).to.equal('three')
+    })
   })
 
   describe('when deserializing into a button', () => {
