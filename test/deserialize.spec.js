@@ -171,9 +171,9 @@ describe('deserializing an object into a form', () => {
     beforeEach(() => {
       form = domify(
         '<form>' +
-        '<input type="text" name="foo[]" value="baz">' +
-        '<input type="text" name="foo[]" value="biz">' +
-        '<input type="text" name="foo[]" value="qux">' +
+        '<input type="text" name="foo[]">' +
+        '<input type="text" name="foo[]">' +
+        '<input type="text" name="foo[]">' +
         '</form>'
       )
       deserialize(form, { foo: ['baz', 'biz', 'qux'] })
